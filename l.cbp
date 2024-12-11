@@ -34,8 +34,6 @@
 		</Compiler>
 		<Unit filename="List.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="queue_test.cpp" />
-		<Unit filename="stack_test.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

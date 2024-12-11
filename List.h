@@ -8,6 +8,18 @@
 template <typename T>
 class List
 {
+protected:
+     struct Node
+    {
+        T data;
+        Node* next;
+        Node(const T& value) : data(value), next(nullptr) {}
+    };
+
+    Node* head;
+    size_t list_size;
+    void ProtectedCopyFrom(const List& other);
+
 public:
     List(); // Конструктор по умолчанию
     List(const List& other); // Конструктор копирования
@@ -24,12 +36,6 @@ public:
     virtual bool IsEmpty() const = 0;
     virtual size_t Size() const = 0;
 
-    struct Node
-    {
-        T data;
-        Node* next;
-        Node(const T& value) : data(value), next(nullptr) {}
-    };
 
     class Iterator
     {
@@ -86,13 +92,6 @@ private:
     virtual Const_iterator cend() const = 0;
     virtual Const_iterator cbegin() const = 0;
 
-
-
-protected:
-
-    Node* head;
-    size_t list_size;
-    void ProtectedCopyFrom(const List& other);
 
 
 private:
