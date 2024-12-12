@@ -37,6 +37,8 @@ public:
     virtual size_t Size() const = 0;
 
 
+    class Const_iterator;
+
     class Iterator
     {
     public:
@@ -56,6 +58,9 @@ public:
 
         bool operator == (const Iterator& other) const {return p==other.p;}
         bool operator != (const Iterator& other) const {return p!=other.p;}
+
+        bool operator==(const Const_iterator& other) const { return p == other.p; }
+        bool operator!=(const Const_iterator& other) const { return p != other.p; }
 
     private:
         Node* p;
@@ -80,8 +85,11 @@ public:
     Const_iterator& operator++(){p = p->next; return *this;}
     Const_iterator operator++(int){Const_iterator t = *this; ++(*this);return t;}
 
-    bool operator==(const Const_iterator& other) const { return p == other.p; }
-    bool operator!=(const Const_iterator& other) const { return p != other.p; }
+    bool operator==(const Const_iterator& other) const {return p == other.p;}
+    bool operator!=(const Const_iterator& other) const {return p != other.p;}
+
+    bool operator == (const Iterator& other) const {return p==other.p;}
+    bool operator != (const Iterator& other) const {return p!=other.p;}
 
 private:
     Node* p;
@@ -91,6 +99,8 @@ private:
     virtual Iterator begin() = 0;
     virtual Const_iterator cend() const = 0;
     virtual Const_iterator cbegin() const = 0;
+    virtual Const_iterator end() const = 0;
+    virtual Const_iterator begin() const = 0;
 
 
 
@@ -212,10 +222,12 @@ public:
     bool IsEmpty() const override;
     size_t Size() const override;
 
-    typename List<T>::Iterator begin() override { return typename List<T>::Iterator(this->head); }
-    typename List<T>::Iterator end() override { return typename List<T>::Iterator(nullptr); }
-    typename List<T>::Const_iterator cbegin() const override { return typename List<T>::Const_iterator(this->head); }
-    typename List<T>::Const_iterator cend() const override { return typename List<T>::Const_iterator(nullptr); }
+    typename List<T>::Iterator begin() override {return typename List<T>::Iterator(this->head);}
+    typename List<T>::Iterator end() override {return typename List<T>::Iterator(nullptr);}
+    typename List<T>::Const_iterator cbegin() const override {return typename List<T>::Const_iterator(this->head);}
+    typename List<T>::Const_iterator cend() const override {return typename List<T>::Const_iterator(nullptr);}
+    typename List<T>::Const_iterator begin() const override {return typename List<T>::Const_iterator(this->head);}
+    typename List<T>::Const_iterator end() const override {return typename List<T>::Const_iterator(nullptr);}
 
 private:
     using List<T>::head;
@@ -243,10 +255,12 @@ public:
     bool IsEmpty() const override;
     size_t Size() const override;
 
-    typename List<T>::Iterator begin() override { return typename List<T>::Iterator(this->head); }
-    typename List<T>::Iterator end() override { return typename List<T>::Iterator(nullptr); }
-    typename List<T>::Const_iterator cbegin() const override { return typename List<T>::Const_iterator(this->head); }
-    typename List<T>::Const_iterator cend() const override { return typename List<T>::Const_iterator(nullptr); }
+    typename List<T>::Iterator begin() override {return typename List<T>::Iterator(this->head);}
+    typename List<T>::Iterator end() override {return typename List<T>::Iterator(nullptr);}
+    typename List<T>::Const_iterator cbegin() const override {return typename List<T>::Const_iterator(this->head);}
+    typename List<T>::Const_iterator cend() const override {return typename List<T>::Const_iterator(nullptr);}
+    typename List<T>::Const_iterator begin() const override {return typename List<T>::Const_iterator(this->head);}
+    typename List<T>::Const_iterator end() const override {return typename List<T>::Const_iterator(nullptr);}
 
 private:
     typename List<T>::Node* tail;
